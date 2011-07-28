@@ -26,12 +26,9 @@ public class ConfigIO {
     }
 
     public void save() {
-        Thread save = new Thread() {
-            @Override public void run() {
-                data.save();
-            }
-        };
-        save.start();
+        synchronized(data) {
+            data.save();
+        }
     }
 
     public Configuration load() {
